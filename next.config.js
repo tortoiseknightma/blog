@@ -86,11 +86,23 @@ function getOutput() {
   return undefined
 }
 
+function getBasePath() {
+  const subPath =
+    process.env.NEXT_PUBLIC_BASE_PATH || process.env.NEXT_PUBLIC_SUB_PATH || ''
+  if (!subPath) return ''
+  const normalized = `/${subPath}`.replace(/\/+/g, '/').replace(/\/$/, '')
+  return normalized === '/' ? '' : normalized
+}
+
+const basePath = getBasePath()
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
   output: getOutput(),
+  basePath: basePath || undefined,
+  trailingSlash: isExport(),
   staticPageGenerationTimeout: 300,
 
   // 性能优化配置
@@ -117,6 +129,7 @@ const nextConfig = {
       locales: locales
     },
   images: {
+    unoptimized: isExport(),
     // 图片压缩和格式优化
     formats: ['image/avif', 'image/webp'],
     // 图片尺寸优化

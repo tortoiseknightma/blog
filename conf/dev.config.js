@@ -2,7 +2,7 @@
  * 开发人员可能需要关注的配置
  */
 module.exports = {
-  SUB_PATH: '', // leave this empty unless you want to deploy in a folder
+  SUB_PATH: process.env.NEXT_PUBLIC_SUB_PATH || '', // leave this empty unless you want to deploy in a folder
   DEBUG: process.env.NEXT_PUBLIC_DEBUG || false, // 是否显示调试按钮
   // TAILWINDCSS 配置的自定义颜色，作废
   BACKGROUND_LIGHT: '#eeeeee', // use hex value, don't forget '#' e.g #fffefc
