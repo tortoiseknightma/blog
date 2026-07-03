@@ -192,6 +192,13 @@ function urlForLocalPath(localPath) {
     .join('/')}`
 }
 
+function urlForPublicPath(publicPath) {
+  return `${PUBLIC_BASE_URL.replace(/\/$/, '')}/${publicPath
+    .split('/')
+    .map(encodeURIComponent)
+    .join('/')}`
+}
+
 function readManifest() {
   if (!fs.existsSync(MANIFEST_PATH)) {
     return { version: 1, generatedAt: null, items: {} }
@@ -291,8 +298,13 @@ async function downloadCandidate(candidate) {
   const key = candidate.key
   const existing = manifest.items[key]
   if (existing && fs.existsSync(path.join(process.cwd(), 'public', existing.publicPath))) {
+    const publicUrl = urlForPublicPath(existing.publicPath)
+    if (existing.publicUrl !== publicUrl) {
+      existing.publicUrl = publicUrl
+      writeManifest(manifest)
+    }
     counters.reused += 1
-    return existing.publicUrl
+    return publicUrl
   }
 
   const existingFile = findExistingDownload(candidate)
