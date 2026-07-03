@@ -391,7 +391,6 @@ async function migrateCandidate(candidate) {
     if (candidate.kind === 'block-image') {
       await notionRequest('PATCH', `/blocks/${normalizeId(candidate.ownerId)}`, {
         image: {
-          type: 'external',
           external: { url: publicUrl },
           caption: candidate.caption || []
         }
