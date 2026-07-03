@@ -1,6 +1,10 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
-import { fetchGlobalAllData, getPostBlocks } from '@/lib/db/SiteDataApi'
+import {
+  fetchGlobalAllData,
+  getPostBlocks,
+  sanitizeExportedSiteImages
+} from '@/lib/db/SiteDataApi'
 import { generateRobotsTxt } from '@/lib/utils/robots.txt'
 import { generateRss } from '@/lib/utils/rss'
 import { generateSitemapXml } from '@/lib/utils/sitemap.xml'
@@ -57,6 +61,7 @@ export async function getStaticProps(req) {
   }
 
   // 生成robotTxt
+  sanitizeExportedSiteImages(props)
   generateRobotsTxt(props)
   // 生成Feed订阅
   generateRss(props)
@@ -70,6 +75,8 @@ export async function getStaticProps(req) {
   }
 
   // 生成全文索引 - 仅在 yarn build 时执行 && process.env.npm_lifecycle_event === 'build'
+
+  sanitizeExportedSiteImages(props)
 
   delete props.allPages
 
