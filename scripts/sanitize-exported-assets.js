@@ -5,6 +5,7 @@ const outDir = path.join(process.cwd(), 'out')
 const homeBanner = process.env.NEXT_PUBLIC_HOME_BANNER_IMAGE
 const avatar = process.env.NEXT_PUBLIC_AVATAR
 const githubProfile = process.env.NEXT_PUBLIC_CONTACT_GITHUB
+const siteDescription = process.env.NEXT_PUBLIC_DESCRIPTION
 
 if (!homeBanner) {
   console.log('[sanitize-exported-assets] NEXT_PUBLIC_HOME_BANNER_IMAGE is empty; skipped')
@@ -36,6 +37,9 @@ const fallbackReplacements = [
 const githubReplacements = githubProfile
   ? [[/https:\/\/github\.com\/Tortoise0Knight(?:\/NotionNext)?/g, githubProfile]]
   : []
+const descriptionReplacements = siteDescription
+  ? [[/Life Enthusiast/g, siteDescription]]
+  : []
 
 let scanned = 0
 let changed = 0
@@ -59,6 +63,13 @@ function sanitizeContent(content) {
   }
 
   for (const [pattern, replacement] of githubReplacements) {
+    next = next.replace(pattern, () => {
+      replacements += 1
+      return replacement
+    })
+  }
+
+  for (const [pattern, replacement] of descriptionReplacements) {
     next = next.replace(pattern, () => {
       replacements += 1
       return replacement
