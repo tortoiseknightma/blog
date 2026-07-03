@@ -24,6 +24,8 @@ jobs:
       NOTION_PAGE_ID: 0c30a55a6fed4e2c937cffe179ae0810
       NEXT_PUBLIC_LINK: https://tortoiseknightma.github.io/blog
       NEXT_PUBLIC_BASE_PATH: /blog
+      NEXT_PUBLIC_HOME_BANNER_IMAGE: https://raw.githubusercontent.com/tortoiseknightma/blog/main/public/images/notion-migrated/site/home-banner.webp
+      NEXT_PUBLIC_AVATAR: https://raw.githubusercontent.com/tortoiseknightma/blog/main/public/images/notion-migrated/site/avatar.webp
     steps:
       - name: Checkout
         uses: actions/checkout@v4
