@@ -4,6 +4,7 @@ const path = require('path')
 const outDir = path.join(process.cwd(), 'out')
 const homeBanner = process.env.NEXT_PUBLIC_HOME_BANNER_IMAGE
 const avatar = process.env.NEXT_PUBLIC_AVATAR
+const githubProfile = process.env.NEXT_PUBLIC_CONTACT_GITHUB
 
 if (!homeBanner) {
   console.log('[sanitize-exported-assets] NEXT_PUBLIC_HOME_BANNER_IMAGE is empty; skipped')
@@ -32,6 +33,10 @@ const fallbackReplacements = [
   /https:\/\/www\.notion\.so\/image\/[^"'<>\\\s)]+/g
 ]
 
+const githubReplacements = githubProfile
+  ? [[/https:\/\/github\.com\/Tortoise0Knight(?:\/NotionNext)?/g, githubProfile]]
+  : []
+
 let scanned = 0
 let changed = 0
 let replacements = 0
@@ -50,6 +55,13 @@ function sanitizeContent(content) {
     next = next.replace(pattern, () => {
       replacements += 1
       return homeBanner
+    })
+  }
+
+  for (const [pattern, replacement] of githubReplacements) {
+    next = next.replace(pattern, () => {
+      replacements += 1
+      return replacement
     })
   }
 
