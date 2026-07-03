@@ -44,6 +44,9 @@ jobs:
       - name: Build static site
         run: yarn export
 
+      - name: Sanitize exported asset URLs
+        run: node scripts/sanitize-exported-assets.js
+
       - name: Add GitHub Pages marker
         run: touch out/.nojekyll
 
