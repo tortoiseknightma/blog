@@ -5,6 +5,7 @@ const outDir = path.join(process.cwd(), 'out')
 const homeBanner = process.env.NEXT_PUBLIC_HOME_BANNER_IMAGE
 const avatar = process.env.NEXT_PUBLIC_AVATAR
 const githubProfile = process.env.NEXT_PUBLIC_CONTACT_GITHUB
+const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL
 const siteDescription = process.env.NEXT_PUBLIC_DESCRIPTION
 
 if (!homeBanner) {
@@ -40,6 +41,12 @@ const githubReplacements = githubProfile
 const descriptionReplacements = siteDescription
   ? [[/Life Enthusiast/g, siteDescription]]
   : []
+const encodedContactEmail = contactEmail
+  ? Buffer.from(contactEmail, 'utf8').toString('base64')
+  : null
+const emailReplacements = encodedContactEmail
+  ? [[/dG9ydG9pc2Vfa25pZ2h0QG91dGxvb2suY29t/g, encodedContactEmail]]
+  : []
 
 let scanned = 0
 let changed = 0
@@ -70,6 +77,13 @@ function sanitizeContent(content) {
   }
 
   for (const [pattern, replacement] of descriptionReplacements) {
+    next = next.replace(pattern, () => {
+      replacements += 1
+      return replacement
+    })
+  }
+
+  for (const [pattern, replacement] of emailReplacements) {
     next = next.replace(pattern, () => {
       replacements += 1
       return replacement
