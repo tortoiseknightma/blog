@@ -467,10 +467,6 @@ async function main() {
     })
   }
 
-  if (shouldDownload) {
-    writeManifest(manifest)
-  }
-
   console.log('\nSummary')
   console.log(JSON.stringify(counters, null, 2))
   if (failures.length > 0) {

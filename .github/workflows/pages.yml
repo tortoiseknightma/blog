@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -46,6 +46,30 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Migrate new Notion images
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          PUBLIC_BASE_URL: https://raw.githubusercontent.com/tortoiseknightma/blog/main/public
+        run: |
+          if [ -z "$NOTION_TOKEN" ]; then
+            echo "NOTION_TOKEN secret is not set; skipping Notion image migration."
+            exit 0
+          fi
+
+          node scripts/migrate-notion-images.js --download
+
+          if ! git diff --quiet -- public/images/notion-migrated; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/images/notion-migrated
+            git commit -m "Migrate Notion images"
+            git push origin main
+          else
+            echo "No new Notion image files to commit."
+          fi
+
+          node scripts/migrate-notion-images.js --apply
 
       - name: Build static site
         run: yarn export
