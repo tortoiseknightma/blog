@@ -339,7 +339,7 @@ const nextConfig = {
   }
   ,
   experimental: {
-    // cpus: 1,
+    cpus: isExport() ? 1 : undefined,
     scrollRestoration: true,
     // 性能优化实验性功能
     optimizePackageImports: ['@heroicons/react', 'lodash']
