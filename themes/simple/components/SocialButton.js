@@ -14,6 +14,15 @@ const SocialButton = () => {
   return (
     <div className='w-52 justify-center flex-wrap flex my-2'>
       <div className='space-x-5 md:text-xl text-3xl text-gray-600 dark:text-gray-400 text-center'>
+        {siteConfig('CONTACT_HOME') && (
+          <a
+            target='_blank'
+            rel='noreferrer'
+            title={'home'}
+            href={siteConfig('CONTACT_HOME')}>
+            <i className='fas fa-home transform hover:scale-125 duration-150' />
+          </a>
+        )}
         {siteConfig('CONTACT_GITHUB') && (
           <a
             target='_blank'
