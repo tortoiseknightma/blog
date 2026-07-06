@@ -32,6 +32,7 @@ jobs:
       NEXT_PUBLIC_CONTACT_EMAIL: wenxi.ma@smail.nju.edu.cn
       NEXT_PUBLIC_DESCRIPTION: 技术爱好者/AI从业者/知识分享博主
       NEXT_PUBLIC_THEME_SIMPLE_LOGO_DESCRIPTION: '<div>技术爱好者<br/>/AI从业者<br/>/知识分享博主</div>'
+      NEXT_PUBLIC_POST_PREVIEW: 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
