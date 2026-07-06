@@ -340,6 +340,9 @@ const nextConfig = {
   ,
   experimental: {
     cpus: isExport() ? 1 : undefined,
+    workerThreads: isExport() ? false : undefined,
+    staticGenerationMaxConcurrency: isExport() ? 1 : undefined,
+    staticGenerationMinPagesPerWorker: isExport() ? 1000 : undefined,
     scrollRestoration: true,
     // 性能优化实验性功能
     optimizePackageImports: ['@heroicons/react', 'lodash']
