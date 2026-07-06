@@ -19,8 +19,9 @@ const SocialButton = () => {
             target='_blank'
             rel='noreferrer'
             title={'home'}
+            aria-label='home'
             href={siteConfig('CONTACT_HOME')}>
-            <i className='fas fa-home transform hover:scale-125 duration-150' />
+            <i className='fa-solid fa-house transform hover:scale-125 duration-150' />
           </a>
         )}
         {siteConfig('CONTACT_GITHUB') && (
