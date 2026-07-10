@@ -31,8 +31,8 @@ jobs:
       NEXT_PUBLIC_CONTACT_HOME: https://tortoiseknightma.github.io/
       NEXT_PUBLIC_CONTACT_GITHUB: https://github.com/tortoiseknightma
       NEXT_PUBLIC_CONTACT_EMAIL: wenxi.ma@smail.nju.edu.cn
-      NEXT_PUBLIC_DESCRIPTION: 技术爱好者/AI从业者/知识分享博主
-      NEXT_PUBLIC_THEME_SIMPLE_LOGO_DESCRIPTION: '<div>技术爱好者<br/>/AI从业者<br/>/知识分享博主</div>'
+      NEXT_PUBLIC_DESCRIPTION: 多元技术爱好者/人生体验派，在AI时代，用写作夺回人思考的权利
+      NEXT_PUBLIC_THEME_SIMPLE_LOGO_DESCRIPTION: '<div>多元技术爱好者/人生体验派<br/>在AI时代，用写作夺回人思考的权利</div>'
       NEXT_PUBLIC_POST_PREVIEW: 'true'
       NOTION_API_CONCURRENCY: '1'
       NOTION_API_INTERVAL_MS: '700'
